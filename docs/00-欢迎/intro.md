@@ -1,5 +1,5 @@
 ---
-slug: /welcome/intro
+slug: /
 title: 欢迎使用 Memene  # <--- 大标题
 ---
 :::tip 💡 小技巧
