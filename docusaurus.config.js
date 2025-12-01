@@ -39,7 +39,18 @@ const config = {
     defaultLocale: 'zh-Hans',
     locales: ['zh-Hans'],
   },
-
+  headTags:[
+    {
+      tagName:'link',
+      attributes:{
+        rel:'prefetch',
+        href:'https://selfhost.memene.cn/assets/img/memene/MemeneMiniprogramQRCode.jpg',
+        as:'image',
+        type:'image/jpeg',
+        crossOrigin:'anonymous',
+      }
+    }
+  ],
   presets: [
     [
       'classic',
