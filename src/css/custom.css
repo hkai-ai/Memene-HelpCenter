@@ -1,0 +1,102 @@
+/**
+ * Any CSS included here will be global. The classic template
+ * bundles Infima by default. Infima is a CSS framework designed to
+ * work well for content-centric websites.
+ */
+
+/* You can override the default Infima variables here. */
+:root {
+  --ifm-color-primary: #E11F00;
+  --ifm-color-primary-dark: #29784c;
+  --ifm-color-primary-darker: #277148;
+  --ifm-color-primary-darkest: #205d3b;
+  --ifm-color-primary-light: #33925d;
+  --ifm-color-primary-lighter: #359962;
+  --ifm-color-primary-lightest: #3cad6e;
+  --ifm-code-font-size: 95%;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+  /* 互联网大厂标准字体栈 (优先使用苹果字体，其次微软雅黑) */
+  --ifm-font-family-base: system-ui, -apple-system, "PingFang SC", "Microsoft YaHei", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  
+  /* 稍微增加一点行高，让阅读呼吸感更强 (Notion 风格) */
+  --ifm-line-height-base: 1.6;
+}
+
+/* For readability concerns, you should choose a lighter palette in dark mode. */
+[data-theme='dark'] {
+  --ifm-color-primary: #25c2a0;
+  --ifm-color-primary-dark: #21af90;
+  --ifm-color-primary-darker: #1fa588;
+  --ifm-color-primary-darkest: #1a8870;
+  --ifm-color-primary-light: #29d5b0;
+  --ifm-color-primary-lighter: #32d8b4;
+  --ifm-color-primary-lightest: #4fddbf;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+}
+
+/* =========================================
+   侧边栏美化：仿 OmniBox 分割线风格
+   ========================================= */
+
+/* 1. 针对所有一级分类（Level 1 Category），加上顶部边框 */
+.theme-doc-sidebar-item-category-level-1 {
+  margin-top: 16px;         /* 离上面那组远一点 */
+  padding-top: 16px;        /* 文字离线稍微有点距离 */
+  border-top: 1px solid var(--ifm-color-emphasis-200); /* 画一条淡淡的灰线 */
+}
+
+/* 2. 但是！第一个分类（比如“欢迎”）上面不要线，不然很难看 */
+.theme-doc-sidebar-item-category-level-1:first-child {
+  border-top: none;
+  margin-top: 0;
+  padding-top: 0;
+}
+
+/* 3. 让分类标题（比如“🚀 快速开始”）字体稍微大一点、粗一点，更像个标题 */
+.theme-doc-sidebar-item-category-level-1 > .menu__list-item-collapsible {
+  font-weight: bold;
+  font-size: 15px;
+  color: var(--ifm-color-emphasis-700); /* 颜色加深一点 */
+  margin-bottom: 4px; /* 标题和下面的文章拉开一点点距离 */
+}
+
+/* 4. 如果你觉得 OmniBox 那种“禁止点击”的感觉还不够，把鼠标指针也改了 */
+.theme-doc-sidebar-item-category-level-1 > .menu__list-item-collapsible:hover {
+  background: none; /* 鼠标悬停不要变背景色 */
+  cursor: default;  /* 鼠标变成普通箭头，不是小手 */
+}
+/* 隐藏导航栏左侧的 Logo 图片，只保留文字 */
+.navbar__brand .navbar__logo {
+  display: none;
+}
+/* ========================
+   导航栏布局调整
+   ======================== */
+/* ========================
+   导航栏布局调整 (暴力修正版)
+   ======================== */
+
+/* 我们不找名字了，直接找右边栏的“最后一个元素”（就是那个搜索框） */
+.navbar__items--right > :last-child {
+  order: -1;  /* 强行排到第一位 */
+  margin-right: 15px; /* 给右边留点空隙 */
+  margin-left: 0;     /* 去掉左边的多余空隙 */
+}
+
+/* 如果搜索框太短，拉长一点 */
+.navbar__items--right > :last-child input {
+  min-width: 200px;
+}
+/* ========================
+   细节优化：隐藏外部链接图标
+   ======================== */
+
+/* 隐藏导航栏文字旁边那个“方块箭头”图标 */
+.navbar__link svg {
+  display: none !important;
+}
+
+/* ⚠️ 但是！为了防止把搜索框的图标也误伤了，我们得“保释”一下搜索框 */
+.navbar__search svg {
+  display: block !important;
+}
