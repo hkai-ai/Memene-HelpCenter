@@ -23,12 +23,12 @@ const config = {
   url: 'https://memene.cn',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: '/help/',
+  baseUrl: '/memene/help/',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'facebook', // Usually your GitHub org/user name.
-  projectName: 'docusaurus', // Usually your repo name.
+  organizationName: 'HKAI', // Usually your GitHub org/user name.
+  projectName: 'Memene', // Usually your repo name.
 
   onBrokenLinks: 'throw',
 
@@ -136,6 +136,9 @@ const config = {
         language: ["en", "zh"],
         highlightSearchTermsOnTargetPage: true,
         explicitSearchResultPath: true,
+        indexBlog: false,
+        docsDir: './docs',
+        docsRouteBasePath: '/',
       },
     ],
   ],
