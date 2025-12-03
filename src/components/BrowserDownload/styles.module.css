@@ -1,0 +1,121 @@
+/**
+ * 浏览器下载组件样式
+ */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  border: 2px solid var(--ifm-color-emphasis-200);
+  border-radius: 12px;
+  background: linear-gradient(
+    135deg,
+    var(--ifm-background-color) 0%,
+    var(--ifm-color-emphasis-100) 100%
+  );
+}
+
+.title {
+  margin: 0 0 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--ifm-color-emphasis-700);
+}
+
+.browserList {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.browserItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 1.25rem;
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 10px;
+  background: var(--ifm-background-color);
+  text-decoration: none;
+  transition: all 0.25s ease;
+  min-width: 90px;
+  /* 取消链接默认颜色，让图标显示自己的颜色 */
+  color: inherit;
+}
+
+.browserItem:hover {
+  transform: translateY(-4px);
+  border-color: var(--browser-color);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  text-decoration: none;
+}
+
+.browserItem:hover .iconWrapper {
+  transform: scale(1.1);
+}
+
+.browserItem:hover .browserName {
+  color: var(--browser-color);
+}
+
+/* 移除链接图标 */
+.browserItem::after {
+  display: none !important;
+}
+
+.iconWrapper {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.25s ease;
+}
+
+.logo {
+  width: 48px;
+  height: 48px;
+  /* 禁用全局图片样式 */
+  margin: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  cursor: inherit !important;
+}
+
+.logo:hover {
+  transform: none !important;
+}
+
+
+.browserName {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--ifm-color-emphasis-700);
+  transition: color 0.25s ease;
+}
+
+/* 响应式调整 */
+@media (max-width: 480px) {
+  .browserList {
+    gap: 1rem;
+  }
+
+  .browserItem {
+    padding: 0.75rem 1rem;
+    min-width: 80px;
+  }
+
+  .iconWrapper {
+    width: 40px;
+    height: 40px;
+  }
+
+  .browserName {
+    font-size: 0.8rem;
+  }
+}
+

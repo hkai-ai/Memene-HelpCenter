@@ -10,58 +10,64 @@ import ExecutionEnvironment from "@docusaurus/ExecutionEnvironment"
  * 只在浏览器环境中执行
  */
 if (ExecutionEnvironment.canUseDOM) {
-  /** @type {import('medium-zoom').Zoom | null} */
-  let zoom = null
+  // 创建单例 zoom 实例
+  const zoom = mediumZoom({
+    margin: 24,
+    background: "rgba(0, 0, 0, 0.85)",
+    scrollOffset: 0,
+  })
 
   /**
-   * 为页面中的图片添加放大功能
+   * 判断图片是否应该启用放大功能
    */
-  const attachZoom = () => {
-    // 先清除之前的 zoom 实例
-    if (zoom) {
-      zoom.detach()
-    }
+  const shouldZoom = (img) => {
+    // 排除带有 no-zoom 类的图片
+    if (img.classList.contains("no-zoom")) return false
+    // 排除非内容区域的图片
+    if (!img.closest(".markdown") && !img.closest("article")) return false
+    return true
+  }
 
-    // 选择文档内容区域的图片，排除 logo、图标等
-    zoom = mediumZoom(".markdown img, article img", {
-      margin: 24,
-      background: "rgba(0, 0, 0, 0.85)",
-      scrollOffset: 0,
+  /**
+   * 为新图片附加 zoom 功能
+   */
+  const attachZoomToImages = () => {
+    const images = document.querySelectorAll(".markdown img, article img")
+    images.forEach((img) => {
+      // 检查是否已经附加过 zoom
+      if (img.dataset.zoomAttached) return
+      // 检查是否应该启用 zoom
+      if (!shouldZoom(img)) return
+      
+      zoom.attach(img)
+      img.dataset.zoomAttached = "true"
     })
   }
 
   // 页面加载完成后初始化
-  window.addEventListener("load", attachZoom)
+  window.addEventListener("load", attachZoomToImages)
 
-  // 监听 Docusaurus 的路由变化，在页面切换后重新绑定
-  // 使用 MutationObserver 监听 DOM 变化
-  const observer = new MutationObserver((mutations) => {
-    let shouldReattach = false
-    for (const mutation of mutations) {
-      if (mutation.addedNodes.length > 0) {
-        shouldReattach = true
-        break
-      }
-    }
-    if (shouldReattach) {
-      // 延迟执行，等待 DOM 渲染完成
-      setTimeout(attachZoom, 100)
-    }
+  // 监听路由变化（Docusaurus SPA）
+  // 使用更保守的 MutationObserver 策略
+  let debounceTimer = null
+  const observer = new MutationObserver(() => {
+    // 防抖：避免频繁触发
+    if (debounceTimer) clearTimeout(debounceTimer)
+    debounceTimer = setTimeout(attachZoomToImages, 300)
   })
 
   // 开始观察
-  if (document.body) {
+  const startObserving = () => {
     observer.observe(document.body, {
       childList: true,
       subtree: true,
     })
+  }
+
+  if (document.body) {
+    startObserving()
   } else {
-    window.addEventListener("DOMContentLoaded", () => {
-      observer.observe(document.body, {
-        childList: true,
-        subtree: true,
-      })
-    })
+    window.addEventListener("DOMContentLoaded", startObserving)
   }
 }
 

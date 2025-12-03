@@ -221,17 +221,25 @@
 
 /**
  * 图片悬停效果 - 提示用户可以点击查看大图
+ * 排除 .no-zoom 类的图片
  */
-.markdown img,
-article img {
+.markdown img:not(.no-zoom),
+article img:not(.no-zoom) {
   cursor: zoom-in;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.markdown img:hover,
-article img:hover {
+.markdown img:not(.no-zoom):hover,
+article img:not(.no-zoom):hover {
   transform: scale(1.02);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+/**
+ * 禁用放大的图片样式
+ */
+img.no-zoom {
+  cursor: pointer;
 }
 
 /**
