@@ -96,7 +96,121 @@
   display: none !important;
 }
 
-/* ⚠️ 但是！为了防止把搜索框的图标也误伤了，我们得“保释”一下搜索框 */
+/* ⚠️ 但是！为了防止把搜索框的图标也误伤了，我们得"保释"一下搜索框 */
 .navbar__search svg {
   display: block !important;
+}
+
+/* ========================
+   图片居中 + 图注样式
+   ======================== */
+
+/**
+ * 让文档中的图片居中显示
+ * 使用方式：直接用 Markdown 语法 ![图注文字](图片地址)
+ */
+.markdown img {
+  display: block;
+  margin: 1.5rem auto;
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/**
+ * 图注样式：利用 <img> 的 alt 属性通过 ::after 伪元素显示
+ * 原理：Docusaurus 会把 Markdown 图片渲染成 <p><img alt="xxx" /></p> 结构
+ */
+.markdown p:has(> img) {
+  text-align: center;
+}
+
+/**
+ * 图注容器 - 使用 <figure> + <figcaption> 语法时的样式
+ * 使用方式：
+ * <figure>
+ *   <img src="图片地址" alt="图片描述" />
+ *   <figcaption>这里是图注文字</figcaption>
+ * </figure>
+ */
+.markdown figure {
+  margin: 1.5rem auto;
+  text-align: center;
+  max-width: 100%;
+}
+
+.markdown figure img {
+  margin: 0 auto 0.5rem;
+}
+
+.markdown figcaption {
+  color: var(--ifm-color-emphasis-600);
+  font-size: 0.875rem;
+  font-style: italic;
+  margin-top: 0.5rem;
+}
+
+/* ========================
+   链接图标样式
+   ======================== */
+
+/**
+ * 为文档中的外部链接添加图标
+ * 外部链接：以 http:// 或 https:// 开头的链接
+ */
+.markdown a[href^="http"]::after,
+.markdown a[href^="https"]::after {
+  content: "";
+  display: inline-block;
+  width: 0.75em;
+  height: 0.75em;
+  margin-left: 0.2em;
+  vertical-align: middle;
+  /* 外链图标 - 方框带箭头 */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6'/%3E%3Cpolyline points='15 3 21 3 21 9'/%3E%3Cline x1='10' y1='14' x2='21' y2='3'/%3E%3C/svg%3E");
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0.6;
+  transition: opacity 0.2s ease;
+}
+
+.markdown a[href^="http"]:hover::after,
+.markdown a[href^="https"]:hover::after {
+  opacity: 1;
+}
+
+/**
+ * 为内部链接添加图标（可选）
+ * 内部链接：以 / 开头或相对路径的链接
+ */
+.markdown a:not([href^="http"]):not([href^="#"])::after {
+  content: "";
+  display: inline-block;
+  width: 0.7em;
+  height: 0.7em;
+  margin-left: 0.15em;
+  vertical-align: middle;
+  /* 链接图标 - 链条样式 */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71'/%3E%3Cpath d='M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71'/%3E%3C/svg%3E");
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0.5;
+  transition: opacity 0.2s ease;
+}
+
+.markdown a:not([href^="http"]):not([href^="#"]):hover::after {
+  opacity: 0.8;
+}
+
+/**
+ * 排除不需要图标的情况：
+ * - 锚点链接 (#xxx)
+ * - 图片链接
+ * - 按钮样式的链接
+ */
+.markdown a[href^="#"]::after,
+.markdown a:has(img)::after,
+.markdown a.button::after {
+  display: none;
 }
