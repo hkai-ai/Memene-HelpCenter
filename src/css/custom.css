@@ -214,3 +214,35 @@
 .markdown a.button::after {
   display: none;
 }
+
+/* ========================
+   图片点击放大功能样式
+   ======================== */
+
+/**
+ * 图片悬停效果 - 提示用户可以点击查看大图
+ */
+.markdown img,
+article img {
+  cursor: zoom-in;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.markdown img:hover,
+article img:hover {
+  transform: scale(1.02);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+/**
+ * medium-zoom 放大后的样式覆盖
+ */
+.medium-zoom-overlay {
+  z-index: 999;
+}
+
+.medium-zoom-image--opened {
+  z-index: 1000;
+  cursor: zoom-out;
+  border-radius: 4px;
+}
