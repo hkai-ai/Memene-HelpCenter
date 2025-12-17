@@ -1,102 +1,894 @@
 /**
- * Any CSS included here will be global. The classic template
- * bundles Infima by default. Infima is a CSS framework designed to
- * work well for content-centric websites.
+ * Cubox 风格样式定制
+ * 像素级复刻 Cubox 帮助中心设计，但将主色调改为#E11F00
  */
 
-/* You can override the default Infima variables here. */
+/* =========================================
+   全局色调系统 (Color System)
+   ========================================= */
 :root {
   --ifm-color-primary: #E11F00;
-  --ifm-color-primary-dark: #29784c;
-  --ifm-color-primary-darker: #277148;
-  --ifm-color-primary-darkest: #205d3b;
-  --ifm-color-primary-light: #33925d;
-  --ifm-color-primary-lighter: #359962;
-  --ifm-color-primary-lightest: #3cad6e;
-  --ifm-code-font-size: 95%;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
-  /* 互联网大厂标准字体栈 (优先使用苹果字体，其次微软雅黑) */
-  --ifm-font-family-base: system-ui, -apple-system, "PingFang SC", "Microsoft YaHei", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --ifm-color-primary-dark: #c11a00;
+  --ifm-color-primary-darker: #a81700;
+  --ifm-color-primary-darkest: #8f1400;
+  --ifm-color-primary-light: #e83d1a;
+  --ifm-color-primary-lighter: #ea4d2e;
+  --ifm-color-primary-lightest: #ed6d55;
   
-  /* 稍微增加一点行高，让阅读呼吸感更强 (Notion 风格) */
+  /* 文字颜色 */
+  --ifm-color-content: #2C3E50 ;
+  --ifm-color-content-secondary: #666666;
+  
+  /* 链接颜色 */
+  --ifm-link-color: #2C3E50 ;
+  --ifm-link-hover-color: #E11F00;
+  
+  /* 背景色 - 纯白 */
+  --ifm-background-color: #ffffff;
+  --ifm-background-surface-color: #ffffff;
+  
+  /* 边框颜色 */
+  --ifm-color-emphasis-200: #EAEAEA;
+  --ifm-color-emphasis-300: #E5E5E5;
+  
+  /* 覆盖 Infima 默认的菜单项选中背景色 */
+  --ifm-menu-color-active: #E11F00;
+  --ifm-menu-color-background-active: transparent;
+  
+  /* 字体 */
+  --ifm-font-family-base: 'Inter', -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei UI", "Microsoft YaHei", "Source Han Sans CN", sans-serif;
   --ifm-line-height-base: 1.6;
+  --ifm-code-font-size: 95%;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.05);
+    /* 代码字体也顺便优化一下 */
+    --ifm-font-family-monospace: 'JetBrains Mono', 'Fira Code', monospace;
+  /* 侧边栏宽度 */
+  --ifm-sidebar-width: 300px;
 }
 
-/* For readability concerns, you should choose a lighter palette in dark mode. */
+/* 强制亮色模式，忽略暗色模式 */
 [data-theme='dark'] {
-  --ifm-color-primary: #25c2a0;
-  --ifm-color-primary-dark: #21af90;
-  --ifm-color-primary-darker: #1fa588;
-  --ifm-color-primary-darkest: #1a8870;
-  --ifm-color-primary-light: #29d5b0;
-  --ifm-color-primary-lighter: #32d8b4;
-  --ifm-color-primary-lightest: #4fddbf;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+  --ifm-color-primary: #E11F00;
+  --ifm-color-content: #333333;
+  --ifm-color-content-secondary: #666666;
+  --ifm-link-color: #4B5563;
+  --ifm-link-hover-color: #E11F00;
+  --ifm-background-color: #ffffff;
+  --ifm-background-surface-color: #ffffff;
 }
 
 /* =========================================
-   侧边栏美化：仿 OmniBox 分割线风格
+   全局基础样式
+   ========================================= */
+html {
+  background-color: #ffffff;
+}
+
+
+
+
+/* 去除所有默认的灰色背景纹理 */
+.main-wrapper,
+.theme-doc-layout,
+.theme-doc-layout-container {
+  background-color: #ffffff;
+}
+
+/* =========================================
+   链接样式
+   ========================================= */
+a {
+  color: #2C3E50 ;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: #E11F00;
+  text-decoration: none;
+}
+
+/* =========================================
+   侧边栏样式 (Sidebar) - 关键修改
+   ========================================= */
+/* 隐藏 col.col--3 组件（右侧目录，影响布局的列） */
+.col.col--3,
+div.col.col--3,
+.col--3 {
+  display: none !important;
+  width: 0 !important;
+  min-width: 0 !important;
+  max-width: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
+}
+
+/* 隐藏 col.col--3 内部的所有内容 */
+.col.col--3 *,
+div.col.col--3 * {
+  display: none !important;
+}
+
+/* 隐藏右侧目录（Table of Contents） */
+.tableOfContents_bqdL,
+[class*="tableOfContents"],
+.theme-doc-toc-desktop,
+.table-of-contents {
+  display: none !important;
+}
+
+/* 调整 sidebar_njMd 和 sidebarViewport 的间距，确保第一个分类标题有足够间距 */
+[class*="sidebarViewport"],
+[class*="sidebar_njMd"] {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
+
+/* 确保 sidebar_njMd 内的菜单有正确的顶部间距 */
+[class*="sidebar_njMd"] .menu,
+[class*="sidebar_njMd"] nav.menu,
+[class*="sidebar_njMd"] .theme-doc-sidebar-menu {
+  padding-top: 28px !important; /* 确保顶部有 28px 间距 */
+  margin-top: 0 !important;
+}
+
+/* 确保第一个分类标题使用菜单的 padding-top，而不是自己的 margin-top */
+.theme-doc-sidebar-container .menu > .menu__list > .menu__list-item:first-child {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+/* 侧边栏容器 - 纯白背景，右侧分割线 */
+.theme-doc-sidebar-container {
+  background-color: #FFFFFF
+   !important; /* 极淡的灰色背景，与内容区区分 */
+  border-right: 1px solid #EAECEF !important; /* 明确的分割线 */
+  border-left: none;
+  border-top: none;
+  border-bottom: none;
+}
+
+/* 侧边栏菜单列表 */
+.theme-doc-sidebar-container .menu {
+  background-color: #ffffff;
+  padding: 0;
+}
+
+.theme-doc-sidebar-container .menu__list {
+  padding: 0 !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  margin-bottom: 0 !important;
+  /* margin-top 由子菜单列表单独控制 */
+}
+
+/* 确保顶层菜单列表没有额外间距 */
+.theme-doc-sidebar-container .menu > .menu__list {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
+
+/* 确保第一个菜单项没有多余上边距 */
+.theme-doc-sidebar-container .menu__list > .menu__list-item:first-child,
+.theme-doc-sidebar-container .menu__list > *:first-child {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+/* 第一个分类的 collapsible 不需要上边距 */
+.theme-doc-sidebar-container .menu > .menu__list > .menu__list-item:first-child > .menu__list-item-collapsible {
+  margin-top: 0 !important;
+}
+
+/* 1. 侧边栏整体容器 - Cubox 像素级复刻 */
+.theme-doc-sidebar-menu {
+  padding-top: 0 !important; /* 顶部间距由 .menu 统一控制 */
+  padding-bottom: 16px;
+  margin-top: 0 !important;
+}
+
+/* 侧边栏内部所有容器重置 */
+.theme-doc-sidebar-menu > nav,
+.theme-doc-sidebar-menu > div {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
+
+/* 侧边栏宽度调整 - Cubox 蓝图 */
+.theme-doc-sidebar-container {
+  width: 320px !important;
+  min-width: 320px !important;
+  max-width: 320px !important;
+  border-right: 1px solid #E5E7EB !important; /* 明确的分割线 */
+  padding-left: 0px;
+  position: relative;
+}
+
+/* 侧边栏内部菜单的间距和滚动 */
+.theme-doc-sidebar-container .menu {
+  padding: 0 0 3px 3px !important; 
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: #8B8B8B transparent; /* Firefox：默认颜色 #8B8B8B */
+}
+
+/* 自定义滚动条样式 - Webkit 浏览器 */
+.theme-doc-sidebar-container .menu::-webkit-scrollbar {
+  width: 3px;
+}
+
+.theme-doc-sidebar-container .menu::-webkit-scrollbar-track {
+  background: transparent;
+  margin: 0; /* 紧贴侧边线 */
+}
+
+.theme-doc-sidebar-container .menu::-webkit-scrollbar-thumb {
+  background-color: #8B8B8B; /* 默认颜色 */
+  border-radius: 3px;
+}
+
+.theme-doc-sidebar-container .menu::-webkit-scrollbar-thumb:hover,
+.theme-doc-sidebar-container .menu::-webkit-scrollbar-thumb:active {
+  background-color: #636363; /* 悬停/选中时颜色 */
+}
+
+/* 侧边栏整体容器滚动 */
+aside.theme-doc-sidebar-container {
+  height: calc(100vh - 57.6px) !important; /* 对应导航栏高度 57.6px */
+  position: sticky !important;
+  top: 57.6px !important; /* 对应导航栏高度 57.6px */
+}
+
+/* 菜单项基础样式 */
+.theme-doc-sidebar-container .menu__list-item {
+  margin: 0;
+}
+
+/* 2. 一级目录 (分类标题，如"开始使用") */
+/* 分类标题的展开/折叠按钮区域 */
+.theme-doc-sidebar-container .menu__list-item-collapsible > .menu__link,
+.theme-doc-sidebar-container .menu__list-item-collapsible > .menu__caret,
+.theme-doc-sidebar-item-category-level-1 > .menu__list-item-collapsible > .menu__link {
+  font-size: 17.6px !important;   /* 参考样式：17.6px */
+  font-weight: 600 !important;     /* 加粗，强调层级 */
+  color: #2C3E50 !important;       /* 参考样式：#2C3E50 */
+}
+
+/* 子菜单列表样式 - 控制分类标题之间的间距 */
+.theme-doc-sidebar-container .menu__list-item-collapsible .menu__list,
+.theme-doc-sidebar-container .menu__list-item-collapsible > .menu__list {
+  padding: 15px 0px !important;   /* 上下 24px，左右 0px，用于控制分类标题间距 */
+}
+
+/* 分类标题容器样式 */
+.theme-doc-sidebar-container .menu__list-item-collapsible {
+  margin-top: 15px !important;    /* 每个分类标题与前一个要素之间 24px 间距 */
+  margin-bottom: 0 !important;
+  padding: 0 !important;
+  background-color: transparent !important;
+}
+
+/* 分类标题内的链接 - 像素级复刻 Cubox 的 p.sidebar-heading */
+.theme-doc-sidebar-container .menu__list-item-collapsible > .menu__link {
+  padding: 5.6px 24px 5.6px 20px !important; /* Cubox: 5.6px 24px 5.6px 20px */
+  margin: 0 !important;
+  font-size: 17.6px !important; /* Cubox: 17.6px */
+  font-weight: 600 !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important; /* Cubox 字体 */
+  color: #2C3E50 !important;    /* Cubox: #2C3E50 */
+  line-height: 1.5 !important;
+  cursor: default !important;
+  pointer-events: none !important;
+  display: block !important;
+  visibility: visible !important;
+  background-color: transparent !important;
+  border: none !important;
+  box-sizing: border-box !important;
+  width: 100% !important;
+}
+
+/* 分类标题内的 span 标签（对应 Cubox 的 <span> 标签） */
+.categoryLinkLabel_W154,
+[class*="categoryLinkLabel"],
+.theme-doc-sidebar-container .menu__list-item-collapsible > .menu__link > span {
+  display: inline !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  color: inherit !important;
+  font-size: inherit !important;
+  font-weight: inherit !important;
+}
+
+/* 分类标题悬停时变红但不加粗 */
+.theme-doc-sidebar-container .menu__list-item-collapsible > .menu__link:hover {
+  color: #E11F00 !important;      
+  background-color: transparent !important;
+  font-weight: 600 !important; /* 分类标题保持加粗（因为本身就是加粗的） */
+}
+
+/* 第一个分类不需要上边距 - 精确选择器 */
+.theme-doc-sidebar-container .menu > .menu__list > .menu__list-item:first-child > .menu__list-item-collapsible,
+.theme-doc-sidebar-item-category-level-1:first-child > .menu__list-item-collapsible {
+  margin-top: 0 !important;
+}
+
+/* 3. 二级/三级目录 (子菜单项) - 像素级复刻 Cubox 的 a.sidebar-link */
+.theme-doc-sidebar-container .menu__list-item-collapsible .menu__list .menu__link {
+  font-size: 15.2px !important;    /* Cubox: 15.2px */
+  font-weight: 400 !important;     /* 正常粗细 */
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important; /* Cubox 字体 */
+  color: #2C3E50 !important;       /* Cubox: #2C3E50 */
+  line-height: 1.5 !important;     
+  padding: 5.6px 16px 5.6px 32px !important; /* Cubox: 5.6px 16px 5.6px 32px */
+  border-radius: 0 !important;
+  transition: all 0.15s ease;
+  position: relative;
+  background-color: transparent !important;
+  display: block !important;
+  text-decoration: none !important;
+  box-sizing: border-box !important;
+}
+
+/* 子链接内的 span 标签（对应 Cubox 的链接文本） */
+.linkLabel_WmDU,
+[class*="linkLabel"],
+.theme-doc-sidebar-container .menu__list-item-collapsible .menu__list .menu__link > span {
+  display: inline !important;
+  color: inherit !important;
+  font-size: inherit !important;
+  font-weight: inherit !important;
+}
+
+/* 子菜单项列表中最后一项不需要下边距 */
+.theme-doc-sidebar-container .menu__list-item-collapsible .menu__list .menu__list-item:last-child .menu__link {
+  margin-bottom: 0 !important;
+}
+
+/* 子链接悬浮样式 - 确保优先级足够 */
+.theme-doc-sidebar-container .menu__list-item-collapsible .menu__list .menu__link:hover:not(.menu__link--active) {
+  color: #E11F00 !important; /* 悬停时变红 */
+  font-weight: 400 !important; /* 悬停时保持正常粗细，不加粗 */
+  background-color: transparent !important;
+}
+
+/* 非 collapsible 的独立菜单项 */
+.theme-doc-sidebar-container .menu__list > .menu__list-item:not(.menu__list-item--collapsed):not(.theme-doc-sidebar-item-category-level-1) > .menu__link {
+  font-size: 15.2px !important;    /* Cubox: 15.2px */
+  font-weight: 400 !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important; /* Cubox 字体 */
+  color: #2C3E50 !important;
+  padding: 5.6px 16px 5.6px 32px !important; /* Cubox: 5.6px 16px 5.6px 32px */
+}
+
+/* 非 collapsible 独立菜单项最后一项不需要下边距 */
+.theme-doc-sidebar-container .menu__list > .menu__list-item:not(.menu__list-item--collapsed):not(.theme-doc-sidebar-item-category-level-1):last-child > .menu__link {
+  margin-bottom: 0 !important;
+}
+
+/* 非 collapsible 独立菜单项悬浮样式 - 确保优先级足够 */
+.theme-doc-sidebar-container .menu__list > .menu__list-item:not(.menu__list-item--collapsed):not(.theme-doc-sidebar-item-category-level-1) > .menu__link:hover:not(.menu__link--active) {
+  color: #E11F00 !important; /* 悬停时变红 */
+  font-weight: 400 !important; /* 悬停时保持正常粗细，不加粗 */
+  background-color: transparent !important;
+}
+
+/* 菜单项悬停效果 - 颜色变红但不加粗 */
+/* 只针对非选中状态的链接 - 提高优先级 */
+.theme-doc-sidebar-container .menu .menu__link:hover:not(.menu__link--active),
+.theme-doc-sidebar-container .menu__list .menu__link:hover:not(.menu__link--active),
+.theme-doc-sidebar-container .menu__link:hover:not(.menu__link--active) {
+  background-color: transparent !important;
+  color: #E11F00 !important; /* 悬停时变红 */
+  font-weight: 400 !important; /* 悬停时保持正常粗细，不加粗 */
+}
+
+/* 分类标题悬停效果 - 提高优先级 */
+.theme-doc-sidebar-container .menu__list-item-collapsible:hover,
+.theme-doc-sidebar-container .menu .menu__list-item-collapsible:hover {
+  background-color: transparent !important;
+  color: #E11F00 !important;
+}
+
+/* =========================================
+   菜单项选中状态 - 仅子菜单项（Cubox 风格）
+   ========================================= */
+/* 子菜单项选中：文字红色、加粗、左侧红色竖条 */
+/* 强制覆盖所有默认的 active 样式，移除背景色 */
+.theme-doc-sidebar-container .menu__link--active {
+  background-color: transparent !important;
+  background: transparent !important;
+}
+
+/* 通用选择器：所有选中的菜单项（排除分类标题） */
+/* 排除所有可能的分类标题结构 */
+.theme-doc-sidebar-container .menu__link--active:not(.menu__list-item-collapsible):not(.menu__list-item-collapsible > *) {
+  color: #E11F00 !important; /* 选中状态红色 */
+  background-color: transparent !important;
+  background: transparent !important;
+  font-weight: 600 !important; /* 选中时加粗 */
+  position: relative !important; /* 确保伪元素相对于此定位 */
+  /* padding 和 margin 继承基础样式 */
+}
+
+/* 确保选中状态在悬浮时也保持加粗和红色 - 优先级高于通用悬浮样式 */
+/* 使用更具体的选择器确保优先级 */
+.theme-doc-sidebar-container .menu__link.menu__link--active:not(.menu__list-item-collapsible):not(.menu__list-item-collapsible > *):hover,
+.theme-doc-sidebar-container .menu__link--active:not(.menu__list-item-collapsible):not(.menu__list-item-collapsible > *):hover {
+  color: #E11F00 !important; /* 选中时悬浮保持红色 */
+  font-weight: 600 !important; /* 选中时悬浮保持加粗 */
+  background-color: transparent !important;
+}
+
+.theme-doc-sidebar-container .menu__link--active:not(.menu__list-item-collapsible):not(.menu__list-item-collapsible > *)::before {
+  content: '' !important;
+  position: absolute !important;
+  left: 0px !important; 
+  top: 50% !important;
+  transform: translateY(-50%) !important; /* 垂直居中 */
+  height: 32px !important; /* 黄金比例高度 */
+  width: 4px !important; /* 细致宽度 */
+  background-color: #E11F00 !important; /* 选中状态红色竖条 */
+  z-index: 1;
+
+}
+
+/* 更精确的排除：确保父分类标题不会应用红色样式 */
+.theme-doc-sidebar-container .menu__list-item.menu__list-item-collapsible > .menu__link--active {
+  color: #000000 !important;
+  background-color: transparent !important;
+  background: transparent !important;
+  font-weight: 600 !important;
+}
+
+.theme-doc-sidebar-container .menu__list-item.menu__list-item-collapsible > .menu__link--active::before {
+  display: none !important;
+  content: none !important;
+}
+
+/* 在 collapsible 内部的子菜单项选中样式 - 像素级复刻 Cubox */
+.theme-doc-sidebar-container .menu__list-item-collapsible .menu__list .menu__link--active {
+  color: #E11F00 !important;      /* 选中状态红色 */
+  background-color: transparent !important;
+  background: transparent !important;
+  font-weight: 600 !important; /* 选中时加粗 */
+  position: relative !important; /* 确保伪元素相对于此定位 */
+  /* padding 和 margin 继承基础样式，不需要重复设置 */
+}
+
+/* 确保选中状态在悬浮时也保持加粗和红色 - 优先级高于通用悬浮样式 */
+/* 使用更具体的选择器确保优先级 */
+.theme-doc-sidebar-container .menu__list-item-collapsible .menu__list .menu__link.menu__link--active:hover,
+.theme-doc-sidebar-container .menu__list-item-collapsible .menu__list .menu__link--active:hover {
+  color: #E11F00 !important; /* 选中时悬浮保持红色 */
+  font-weight: 600 !important; /* 选中时悬浮保持加粗 */
+  background-color: transparent !important;
+}
+
+
+/* 直接在主菜单列表下的选中项（不在 collapsible 内，且不是分类标题） */
+.theme-doc-sidebar-container .menu__list > .menu__list-item:not(.theme-doc-sidebar-item-category-level-1) > .menu__link--active:not(.menu__list-item-collapsible) {
+  color: #E11F00 !important;
+  background-color: transparent !important;
+  background: transparent !important;
+  font-weight: 600 !important; /* 选中时加粗 */
+  position: relative !important;
+  /* padding 和 margin 继承基础样式 */
+}
+
+
+
+.theme-doc-sidebar-container .menu__list > .menu__list-item:not(.theme-doc-sidebar-item-category-level-1) > .menu__link--active:not(.menu__list-item-collapsible)::before {
+  content: '' !important;
+  position: absolute !important;
+  left: 0px !important; /* 距离侧边栏左边 6px (34 - 28 = 6) */
+  top: 50% !important;
+  transform: translateY(-50%) !important; /* 垂直居中 */
+  height: 32px !important; /* 黄金比例高度 */
+  width: 4px !important; /* 细致宽度 */
+  background-color: #E11F00 !important; /* 选中状态红色竖条 */
+  z-index: 1;
+}
+
+/* 分类标题（.menu__list-item-collapsible 本身）永远保持原样，即使有 active 类 */
+/* 必须放在子菜单项样式之后，确保优先级更高 */
+.theme-doc-sidebar-container .menu__list-item-collapsible.menu__link--active,
+.theme-doc-sidebar-container .menu__list-item.menu__list-item-collapsible > .menu__link--active {
+  color: #000000 !important;
+  background-color: transparent !important;
+  background: transparent !important;
+  font-weight: 600 !important;
+}
+
+.theme-doc-sidebar-container .menu__list-item-collapsible.menu__link--active::before,
+.theme-doc-sidebar-container .menu__list-item.menu__list-item-collapsible > .menu__link--active::before {
+  display: none !important;
+  content: none !important;
+}
+
+/* 分类标题样式（Cubox 风格） */
+.theme-doc-sidebar-item-category-level-1 {
+  margin-top: 0; /* 由上面的 margin-top: 16px 控制 */
+  padding-top: 0;
+  border-top: none;
+}
+
+/* 第一个分类容器样式已在上方定义 */
+
+/* 分类标题样式已在上方定义（第139-151行），此处不再重复 */
+
+/* 确保分类标题永远不会有红色竖条和选中样式 */
+.theme-doc-sidebar-item-category-level-1 > .menu__list-item-collapsible::before {
+  display: none !important;
+  content: none !important;
+}
+
+/* 强制覆盖：分类标题永远保持原样，无论是否有 active 类 */
+.theme-doc-sidebar-item-category-level-1 > .menu__list-item-collapsible.menu__link--active,
+.theme-doc-sidebar-item-category-level-1 > .menu__list-item > .menu__link--active {
+  color: #000000 !important;
+  font-weight: 600 !important;
+  background-color: transparent !important;
+  background: transparent !important;
+}
+
+.theme-doc-sidebar-item-category-level-1 > .menu__list-item-collapsible.menu__link--active::before,
+.theme-doc-sidebar-item-category-level-1 > .menu__list-item > .menu__link--active::before {
+  display: none !important;
+  content: none !important;
+}
+
+/* 最终保障：所有父分类标题结构都保持原样 */
+.theme-doc-sidebar-container .menu__list-item[class*="category"] > .menu__link--active,
+.theme-doc-sidebar-container .menu__list-item[class*="Category"] > .menu__link--active {
+  color: #000000 !important;
+  font-weight: 600 !important;
+  background-color: transparent !important;
+  background: transparent !important;
+}
+
+.theme-doc-sidebar-container .menu__list-item[class*="category"] > .menu__link--active::before,
+.theme-doc-sidebar-container .menu__list-item[class*="Category"] > .menu__link--active::before {
+  display: none !important;
+  content: none !important;
+}
+
+/* 子菜单项缩进（Cubox 风格） */
+.theme-doc-sidebar-container .menu__list-item-collapsible .menu__list,
+.theme-doc-sidebar-container .menu__list-item-collapsible > .menu__list {
+  margin-left: 0 !important;
+  margin-top: 20px !important;     /* 分类标题到子链接：20px */
+  margin-bottom: 0 !important;
+  /* padding 已在前面定义 */
+}
+
+/* 子菜单项样式已在上方定义（第158-171行），此处不再重复 */
+
+/* =========================================
+   隐藏面包屑导航栏
+   ========================================= */
+.theme-doc-breadcrumbs {
+  display: none !important;
+}
+
+/* 也隐藏面包屑的容器 */
+nav.theme-doc-breadcrumbs {
+  display: none !important;
+}
+
+/* 隐藏 breadcrumbs 相关的所有元素 */
+[class*="breadcrumbs"] {
+  display: none !important;
+}
+
+/* =========================================
+   内容区域样式 - 精简版
    ========================================= */
 
-/* 1. 针对所有一级分类（Level 1 Category），加上顶部边框 */
-.theme-doc-sidebar-item-category-level-1 {
-  margin-top: 16px;         /* 离上面那组远一点 */
-  padding-top: 16px;        /* 文字离线稍微有点距离 */
-  border-top: 1px solid var(--ifm-color-emphasis-200); /* 画一条淡淡的灰线 */
+   /* =================================================================
+   Phase 1: 响应式布局修正 (The Responsive Container)
+   目标：模仿 Cubox 的阅读宽度，但保持移动端兼容性
+   ================================================================= */
+
+/* 1. 布局主容器：让它成为一个弹性盒子，但不要写死宽度 */
+.theme-doc-layout-main {
+  /* 确保主内容区域在屏幕宽的时候居中，但允许在窄屏时收缩 */
+  width: 100%; 
+  display: flex;
+  justify-content: center;
 }
 
-/* 2. 但是！第一个分类（比如“欢迎”）上面不要线，不然很难看 */
-.theme-doc-sidebar-item-category-level-1:first-child {
-  border-top: none;
-  margin-top: 0;
-  padding-top: 0;
+/* 2. 核心内容区 (Markdown + 分页) */
+/* 使用 container query 的思想，限制最大宽度，而不是固定宽度 */
+.container, 
+article .theme-doc-markdown, 
+.pagination-nav {
+  width: 100% !important;
+  max-width: 820px !important; /* 这里用 max-width，这就是响应式的关键 */
+  margin: 0 auto !important;
+  padding: 0 24px !important;  /* 移动端两侧保留呼吸空间 */
+  box-sizing: border-box !important;
 }
 
-/* 3. 让分类标题（比如“🚀 快速开始”）字体稍微大一点、粗一点，更像个标题 */
-.theme-doc-sidebar-item-category-level-1 > .menu__list-item-collapsible {
-  font-weight: bold;
-  font-size: 15px;
-  color: var(--ifm-color-emphasis-700); /* 颜色加深一点 */
-  margin-bottom: 4px; /* 标题和下面的文章拉开一点点距离 */
+/* 3. 针对大屏幕的优化 */
+@media (min-width: 997px) {
+  /* 在桌面端，我们可以给内容区更多一点的 Padding，模仿 Cubox 的通透感 */
+  article .theme-doc-markdown {
+    padding: 40px 0 !important; /* 上下留白，左右由 max-width 控制 */
+  }
 }
 
-/* 4. 如果你觉得 OmniBox 那种“禁止点击”的感觉还不够，把鼠标指针也改了 */
-.theme-doc-sidebar-item-category-level-1 > .menu__list-item-collapsible:hover {
-  background: none; /* 鼠标悬停不要变背景色 */
-  cursor: default;  /* 鼠标变成普通箭头，不是小手 */
+/* 4. 图片自适应修正 */
+.theme-doc-markdown img {
+  max-width: 100% !important;
+  height: auto !important;
+  border-radius: 8px; /* Cubox 的圆角通常比较克制 */
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06); /* 更柔和的阴影 */
 }
-/* 隐藏导航栏左侧的 Logo 图片，只保留文字 */
+
+/* 5. 确保隐藏右侧目录的同时，不破坏 Flex 结构 */
+.col--3 {
+  display: none; /* 如果你确定不要右侧目录 */
+}
+/* ============================================================
+   REFACTORED: 布局与导航修复方案 (响应式安全版)
+   ============================================================ */
+
+/* 1. 布局容器：弹性居中，但允许收缩 */
+.theme-doc-layout-main {
+  display: flex !important;
+  justify-content: center !important;
+  width: 100% !important;
+}
+
+/* 2. 文档最外层容器 */
+div[class^="docItemContainer"] {
+  width: 100% !important;
+  max-width: 100% !important; /* 确保不溢出 */
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+}
+
+
+/* 4. 图片样式 - 完美适配 */
+.theme-doc-markdown img {
+  display: block !important;
+  max-width: 100% !important; /* 永远不要超过父容器 */
+  height: auto !important;
+  margin: 32px auto !important;
+  border-radius: 8px !important;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05) !important;
+  border: 1px solid #F2F4F7 !important; /* 增加一点点边框质感 */
+}
+
+/* 5. 分页导航 (Pagination) - 卡片式设计 */
+nav.pagination-nav {
+  /* 布局控制 */
+  width: 100% !important;
+  max-width: 820px !important; /* 与正文同宽 */
+  margin: 40px auto 0 !important;
+  padding: 24px 24px !important; /* 保持与正文一致的内边距 */
+  border-top: 1px solid #EAEAEA !important;
+  
+  /* Flex 布局 */
+  display: flex !important;
+  justify-content: space-between !important;
+  gap: 16px !important;
+}
+
+/* 单个按钮样式 */
+.pagination-nav__link {
+  border: 1px solid #EAEAEA !important;
+  background-color: #FFFFFF !important;
+  border-radius: 8px !important;
+  padding: 16px !important;
+  flex: 1 !important; /* 等宽分布 */
+  text-decoration: none !important;
+  transition: all 0.2s ease !important;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.03) !important;
+  
+  /* 确保文字排版 */
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+/* 悬停效果 - 模仿 Cubox 选中态 */
+.pagination-nav__link:hover {
+  border-color: #E11F00 !important; /* 红色边框 */
+  background-color: #FFFDFD !important; /* 极淡红背景 */
+  transform: translateY(-1px);
+}
+
+
+/* 标题文字 - 深色 */
+.pagination-nav__label {
+  color: #2C3E50 !important;
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  line-height: 1.4 !important;
+}
+
+/* 悬停时标题变红 */
+.pagination-nav__link:hover .pagination-nav__label {
+  color: #E11F00 !important;
+}
+
+/* 强制下一篇文字靠右 */
+.pagination-nav__link--next {
+  text-align: right !important;
+  align-items: flex-end !important;
+}
+.pagination-nav__link--prev {
+  text-align: left !important;
+  align-items: flex-start !important;
+}
+
+/* =========================================
+   垂直韵律 (Vertical Rhythm) - Cubox 风格 (工程优化版)
+   ========================================= */
+
+/* 通用字体设置 - 继承 Cubox 的精致感 */
+.theme-doc-markdown {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif !important;
+  color: #2C3E50 !important;
+}
+
+
+/* =========================================
+   右侧目录 (Table of Contents) - 完全隐藏
+   ========================================= */
+/* 完全隐藏右侧目录栏，使页面布局变为两列 */
+.table-of-contents,
+.theme-doc-toc-desktop,
+.theme-doc-toc-mobile,
+.toc {
+  display: none !important;
+}
+
+/* 隐藏包含右侧目录的容器 */
+.theme-doc-toc-container {
+  display: none !important;
+}
+
+/* =========================================
+   Admonition 提示块样式优化
+   ========================================= */
+.admonition {
+  border: none;
+  border-radius: 8px;
+  background-color: rgba(225, 31, 0, 0.05);
+  padding: 16px 20px;
+  margin: 20px 0;
+}
+
+.admonition-heading {
+  color: #E11F00;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.admonition-content {
+  color: #333333;
+}
+
+.admonition-icon {
+  color: #E11F00;
+}
+
+/* 不同类型的 Admonition */
+.admonition-note {
+  background-color: rgba(225, 31, 0, 0.05);
+}
+
+.admonition-tip {
+  background-color: rgba(225, 31, 0, 0.05);
+}
+
+.admonition-warning {
+  background-color: rgba(225, 31, 0, 0.08);
+}
+
+.admonition-danger {
+  background-color: rgba(225, 31, 0, 0.1);
+}
+
+.admonition-info {
+  background-color: rgba(225, 31, 0, 0.05);
+}
+
+/* =========================================
+   导航栏样式
+   ========================================= */
+.navbar {
+  background-color: #ffffff !important;
+  border-bottom: 0.8px solid #EAEAEA !important;
+  border-bottom-style: solid !important;
+  border-bottom-width: 0.8px !important;
+  box-shadow: none !important;
+  box-sizing: border-box !important;
+  color: rgb(44, 62, 80) !important; /* #2C3E50 */
+  display: block !important;
+  font-size: 16px !important;
+  height: 57.6px !important;
+  left: 0px !important;
+  line-height: 35.2px !important;
+  padding-bottom: 11.2px !important;
+  padding-left: 24px !important;
+  padding-right: 24px !important;
+  padding-top: 11.2px !important;
+  position: fixed !important;
+  right: 0px !important;
+  top: 0px !important;
+  unicode-bidi: isolate !important;
+  width: 100% !important; /* 使用 100% 而不是固定宽度，确保响应式 */
+}
+
+.navbar__brand {
+  color: #333333;
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important; /* Logo 和 site-name 之间的间距，可根据需要调整（如 8px, 12px, 16px 等） */
+  font-size: 20.8px !important; /* 导航栏标题字号 */
+}
+
+.navbar__link {
+  color: #666666;
+}
+
+.navbar__link:hover {
+  color: #E11F00;
+}
+
+/* Logo 占位符：35.2x35.2 */
 .navbar__brand .navbar__logo {
-  display: none;
+  display: block !important;
+  width: 35.2px !important;
+  height: 35.2px !important;
+  margin-right: 0 !important;
+  flex-shrink: 0 !important;
 }
-/* ========================
-   导航栏布局调整
-   ======================== */
-/* ========================
-   导航栏布局调整 (暴力修正版)
-   ======================== */
 
-/* 我们不找名字了，直接找右边栏的“最后一个元素”（就是那个搜索框） */
+/* site-name.can-hide 样式：142.59x35.2，颜色 #2C3E50，字体 20.8px */
+.site-name.can-hide,
+.navbar__brand .site-name,
+.navbar__brand[class*="site-name"],
+.navbar__brand__text,
+.navbar__brand > span,
+.navbar__brand > a,
+.navbar__title {
+  width: 184.59px !important;
+  height: 35.2px !important;
+  color: #2C3E50 !important;
+  font-size: 20.8px !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+  line-height: 35.2px !important;
+  display: flex !important;
+  align-items: center !important;
+  margin-left: 0 !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+/* 导航栏布局调整 */
 .navbar__items--right > :last-child {
-  order: -1;  /* 强行排到第一位 */
-  margin-right: 15px; /* 给右边留点空隙 */
-  margin-left: 0;     /* 去掉左边的多余空隙 */
+  order: -1;
+  margin-right: 15px;
+  margin-left: 0;
 }
 
-/* 如果搜索框太短，拉长一点 */
-.navbar__items--right > :last-child input {
-  min-width: 200px;
-}
-/* ========================
-   细节优化：隐藏外部链接图标
-   ======================== */
 
-/* 隐藏导航栏文字旁边那个“方块箭头”图标 */
+/* 隐藏导航栏文字旁边那个"方块箭头"图标 */
 .navbar__link svg {
   display: none !important;
 }
 
 /* ⚠️ 但是！为了防止把搜索框的图标也误伤了，我们得"保释"一下搜索框 */
+/* 保释搜索框图标 */
 .navbar__search svg {
   display: block !important;
 }
@@ -253,4 +1045,526 @@ img.no-zoom {
   z-index: 1000;
   cursor: zoom-out;
   border-radius: 4px;
+
+/* 仅第一个分类标题没有上边距 */
+.theme-doc-sidebar-container .menu > .menu__list > .menu__list-item:first-child > .menu__list-item-collapsible {
+  margin-top: 0 !important;
+}
+
+/* =========================================
+   代码块样式
+   ========================================= */
+.prism-code {
+  background-color: #f8f9fa;
+  border-radius: 8px;
+}
+
+/* =========================================
+   其他细节优化
+   ========================================= */
+/* 去除不必要的边框和阴影 */
+.card {
+  border: none;
+  box-shadow: none;
+  background-color: #ffffff;
+}
+
+/* 按钮样式 */
+.button {
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.button--primary {
+  background-color: #E11F00;
+  border-color: #E11F00;
+}
+
+.button--primary:hover {
+  background-color: #c11a00;
+  border-color: #c11a00;
+}
+
+/* 列表样式 */
+.theme-doc-markdown ul,
+.theme-doc-markdown ol {
+  color: #333333;
+  padding-left: 24px;
+}
+
+.theme-doc-markdown li {
+  margin-bottom: 8px;
+  line-height: 1.7;
+}
+
+/* 引用块样式 */
+.theme-doc-markdown blockquote {
+  border-left: 3px solid #EAEAEA;
+  background-color: rgba(225, 31, 0, 0.03);
+  padding: 12px 20px;
+  margin: 20px 0;
+  border-radius: 0 6px 6px 0;
+  color: #333333;
+}
+
+/* 表格样式 */
+.theme-doc-markdown table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 20px 0;
+}
+
+.theme-doc-markdown table th,
+.theme-doc-markdown table td {
+  border: 1px solid #EAEAEA;
+  padding: 12px 16px;
+  text-align: left;
+}
+
+.theme-doc-markdown table th {
+  background-color: #f8f9fa;
+  font-weight: 600;
+  color: #333333;
+}
+
+.theme-doc-markdown table td {
+  color: #333333;
+}
+
+/* 水平分割线 */
+.theme-doc-markdown hr {
+  border-color: #EAEAEA;
+  margin: 32px 0;
+}
+/* 针对文档主区域内的 container，解除束缚 */
+.theme-doc-layout-main .container {
+  max-width: 100% !important; /* 不要限制最大宽度，让它铺满 */
+  width: 100% !important;
+  padding-left: 0 !important; /* 移除默认的左右内边距 */
+  padding-right: 0 !important;
+  
+  /* 确保它仅仅是一个通过性的容器 */
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important; /* 协助内部元素居中 */
+}
+
+
+
+/* 1. 导航栏外层容器：布局安全修复 */
+nav.pagination-nav {
+
+  
+  /* 布局设置 */
+  width: 100% !important;
+  border-top: 1px solid #EAEAEA !important; /* 保留顶部分割线 */
+  padding-top: 32px !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  
+  /* 去除容器背景 */
+  background: transparent !important;
+  box-shadow: none !important;
+  position: relative !important;
+  z-index: 10 !important;
+}
+
+/* 2. 链接本体：去除所有“卡片”样式 (边框、背景、阴影) */
+.pagination-nav__link {
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  
+  /* 布局让文字和箭头横向对齐 */
+  display: inline-flex !important; 
+  align-items: center !important;  
+  
+  /* 宽度自适应，不要撑满 */
+  width: auto !important;
+  min-width: 0 !important;
+  flex: initial !important; 
+}
+
+/* 去除悬停时的背景色 */
+.pagination-nav__link:hover {
+  background-color: transparent !important;
+  border: none !important;
+  transform: none !important; /* 去除上浮动画 */
+  text-decoration: none !important;
+}
+
+/* 3. 隐藏默认的小字 (Sublabel: "上一页" / "下一页") */
+.pagination-nav__sublabel {
+  display: none !important;
+}
+
+/* 4. 页面标题样式 (蓝色文字) */
+.pagination-nav__label {
+  color: #2C46F1 !important; /* 你想要的亮蓝色 */
+  font-size: 16px !important;
+  font-weight: 500 !important;
+  line-height: 1.5 !important;
+  transition: color 0.2s ease !important;
+}
+
+/* 悬停时文字稍微变深 */
+.pagination-nav__link:hover .pagination-nav__label {
+  color: #1a35d1 !important; 
+  text-decoration: underline !important; /* 可选：增加下划线增强点击感 */
+}
+
+
+
+
+/* 布局对齐修正：确保下一页靠右显示 */
+.pagination-nav__item--next {
+  text-align: right !important;
+  justify-content: flex-end !important;
+  display: flex !important;
+}
+
+/* ============================================================
+   Phase 5 (Final): 搜索框 - 极简静态版 (Static Minimalist)
+   目标：固定宽度、隐藏提示文字、保留圆角和图标
+   ============================================================ */
+
+/* 1. 搜索框容器 */
+.navbar__search {
+  display: flex;
+  align-items: center;
+  margin-left: 16px; 
+}
+
+/* 2. 核心输入框样式 */
+.navbar__search-input,
+.navbar__search input {
+  /* 外观重置 */
+  appearance: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+  
+  /* 尺寸与形状 */
+  height: 33.6px !important;
+  border-radius: 99px !important; /* 胶囊圆角 */
+  width: 215.6px !important;        /*固定宽度，不再伸缩 */
+  
+  /* 色彩 */
+  background-color:  #FFFFFF !important;
+  border: 1px solid transparent !important;
+  color: #FFFFFF!important;
+  border: 1px solid #EAEAEA !important; /* 默认有描边 */
+  color: #2C3E50 !important; /* 文字颜色修正 */
+  /* 内部排版 (保留左侧放大镜图标的空间) */
+  padding: 0 16px 0 38px !important; 
+  font-size: 14px !important;
+  
+  /* 移除之前的宽度过渡动画 */
+  transition: border-color 0.2s ease, background-color 0.2s ease !important;
+}
+
+/* 3. 搜索图标 (位置微调) */
+.navbar__search-input,
+.navbar__search input {
+  background-position: 12px center !important;
+  background-size: 16px 16px !important;
+  background-repeat: no-repeat !important;
+}
+
+/* 4. 交互态：获得焦点 (Focus) */
+
+.navbar__search-input:focus,
+.navbar__search input:focus {
+  width: 215.6px !important;             /* 👈 关键：保持宽度不变 */
+  background-color: #FFFFFF !important;
+  border-color: #E11F00 !important;    /* 仅保留红框反馈 */
+}
+
+/* 5. 悬停态 */
+.navbar__search-input:hover,
+.navbar__search input:hover {
+  background-color: #EEF0F4 !important;
+  border-color: rgba(0,0,0,0.05) !important;
+}
+
+/* 6. 隐藏所有提示文字和快捷键 (Search & Ctrl+K) */
+
+/* 方法A：隐藏输入框内的 placeholder 文字 ("Search") */
+.navbar__search-input::placeholder,
+.navbar__search input::placeholder {
+  color: transparent !important; /* 让文字变成透明 */
+  opacity: 0 !important;
+}
+
+/* 方法B：隐藏 Docusaurus 默认的快捷键提示块 (Ctrl+K) */
+.navbar__search-keys,
+.DocSearch-Button-Keys,
+kbd {
+  display: none !important; /* 直接隐藏该元素 */
+  visibility: hidden !important;
+  width: 0 !important;
+}
+
+/* 7. 移动端适配 */
+@media (max-width: 996px) {
+  .navbar__search-input,
+  .navbar__search input {
+    width: 36px !important; 
+    padding: 0 !important;
+    background-color: transparent !important;
+  }
+  
+  /* 移动端点击还是需要展开的，不然没法输入 */
+  .navbar__search-input:focus,
+  .navbar__search input:focus {
+    width: 215.6px !important; 
+    background-color: #FFF !important;
+    padding: 0 8px 0 32px !important; 
+  }
+}
+
+/* =================================================================
+   Cubox 风格核心样式 (已清洗非法字符 + 修复响应式布局)
+   ================================================================= */
+
+/* -----------------------------------------------------------------
+   1. 全局布局容器 (The Layout Wrapper)
+   核心逻辑：限制最大宽度 740px，并在手机端自动适应
+   ----------------------------------------------------------------- */
+   .theme-doc-markdown,
+   article > div,
+   [class*="content__default"] {
+     /* 限制阅读区域宽度 */
+     width: 100% !important;
+     max-width: 740px !important;
+     
+     /* 左右 margin 设置为 250.4px，不居中 */
+     margin-left: 250.4px !important;
+     margin-right: 250.4px !important;
+     
+     /* 内边距：左右 40px */
+     padding-left: 40px !important;
+     padding-right: 40px !important;
+     box-sizing: border-box !important;
+   
+     /* 全局字体设置 */
+     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif !important;
+     color: #2C3E50 !important;
+   }
+      /* theme-doc-markdown.markdown 特定样式 */
+      .theme-doc-markdown.markdown {
+        /* 内容宽度 */
+        width: 740px !important;
+        max-width: 740px !important;
+        
+        /* Margin: 上下 0，左右 250.4px */
+        margin-top: 0 !important;
+        margin-right: 250.4px !important;
+        margin-bottom: 0 !important;
+        margin-left: 575.4px !important;
+        
+        /* Border: 所有方向 0 */
+        border-top: 0 !important;
+        border-right: 0 !important;
+        border-bottom: 0 !important;
+        border-left: 0 !important;
+        
+        /* Padding: 上下 32px，左右 40px */
+        padding-top: 32px !important;
+        padding-right: 0px !important;
+        padding-bottom: 32px !important;
+        padding-left: 0px !important;
+        
+        box-sizing: border-box !important;
+      }
+   /* 强制所有子元素跟随父容器宽度 */
+   .theme-doc-markdown h1,
+   .theme-doc-markdown h2,
+   .theme-doc-markdown h3,
+   .theme-doc-markdown h4,
+   .theme-doc-markdown p,
+   .theme-doc-markdown ul,
+   .theme-doc-markdown ol,
+   .theme-doc-markdown li,
+   .theme-doc-markdown img {
+     width: 100% !important;
+     max-width: 100% !important;
+     box-sizing: border-box !important;
+   }
+   
+   /*/* =========================================
+   🚀 布局核心修复：740px 居中容器
+   ========================================= */
+
+/* 1. 锁定内容核心容器 (The Wrapper) */
+/* 我们不一个一个去改 h1, p 的宽度，而是直接限制它们的“爸爸” */
+.theme-doc-markdown,
+article > div,
+[class*="content__default"] {
+  /* 核心逻辑：在电脑上最宽 740px，在手机上 100% */
+  width: 100% !important;
+  max-width: 740px !important;
+  
+  /* 左右 margin 设置为 250.4px，不居中 */
+  margin-left: 555.4px !important;
+  margin-right: 250.4px !important;
+  
+  /* 内边距：左右 40px */
+  padding-left: 40px !important;
+  padding-right: 40px !important;
+  box-sizing: border-box !important;
+}
+
+/* 2. 让内部元素乖乖听话 (The Children) */
+/* 让所有子元素宽度占满容器，不要自己有想法 */
+.theme-doc-markdown h1,
+.theme-doc-markdown h2,
+.theme-doc-markdown h3,
+.theme-doc-markdown h4,
+.theme-doc-markdown p,
+.theme-doc-markdown ul,
+.theme-doc-markdown ol,
+.theme-doc-markdown li,
+.theme-doc-markdown img {
+  width: 100% !important;
+  max-width: 100% !important; /* 它们不需要自己设 740px，跟随父容器即可 */
+  box-sizing: border-box !important;
+}
+
+/* 3. 再次确保分页导航也对齐这个宽度 */
+nav.pagination-nav {
+  width: 100% !important;
+  width: 740px !important; /* 保持与正文同宽 */
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding-left: 0 !important; /* 导航栏本身不需要内边距，因为它里面的按钮会对齐 */
+  padding-right: 0 !important;
+}
+
+
+/* =========================================
+   垂直韵律 (Vertical Rhythm) - Cubox 风格
+   ========================================= */
+/* 标题样式 */
+.theme-doc-markdown h1 {
+  display: block !important;
+  font-size: 35.2px !important;
+  font-weight: 600 !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif !important;
+  color: rgb(44, 62, 80) !important; /* #2C3E50 */
+  height: 30px !important;
+  min-height: 30px !important;
+  max-height: 30px !important;
+  line-height:30px !important;
+  margin-top: -4px !important;      /* margin-block-start: -24px */
+  margin-bottom: 16px !important;     /* margin-block-end: 16px */
+  margin-left: 0 !important;          /* margin-inline-start: 0px */
+  margin-right: 0 !important;         /* margin-inline-end: 0px */
+  padding-top: 40px !important;
+  padding-bottom: 0 !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  box-sizing: content-box !important; /* 确保 height 只包含内容，不包括 padding */
+  unicode-bidi: isolate !important;
+  overflow: visible !important;
+}
+
+.theme-doc-markdown h2 {
+  display: block !important;
+  font-size: 26.4px !important;
+  font-weight: 600 !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif !important;
+  color: rgb(44, 62, 80) !important; /* #2C3E50 */
+  width: 740px !important;
+  min-width: 740px !important;
+  max-width: 740px !important;
+  height: 33px !important;
+  min-height: 33px !important;
+  max-height: 33px !important;
+  line-height: 33px !important;
+  margin-top: -49.6px !important;
+  margin-bottom: 0px !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  padding-top: 73.6px !important;
+  padding-bottom: 4.8px !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  border-bottom: 0.8px solid rgb(234, 236, 239) !important; /* #EAECEF */
+  box-sizing: content-box !important; /* 确保 width 和 height 只包含内容，不包括 padding */
+  -webkit-font-smoothing: antialiased !important;
+  unicode-bidi: isolate !important;
+  overflow: visible !important;
+}
+
+.theme-doc-markdown h3 {
+  font-size: 18px !important;
+  margin-top: 32px !important;
+  margin-bottom: 16px !important;
+  color: #111827 !important;
+  font-weight: 600 !important;
+}
+
+.theme-doc-markdown h4,
+.theme-doc-markdown h5,
+.theme-doc-markdown h6 {
+  font-size: 16px !important;
+  margin-top: 24px !important;
+  margin-bottom: 12px !important;
+  color: #111827 !important;
+  font-weight: 600 !important;
+}
+
+/* 正文段落间距 */
+.theme-doc-markdown p {
+  display: block !important;
+  font-size: 16px !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif !important;
+  color: rgb(44, 62, 80) !important; /* #2C3E50 */
+  height: 27.2px !important;
+  line-height: 27.2px !important;
+  margin-top: 16px !important;      /* margin-block-start: 16px */
+  margin-bottom: 16px !important;   /* margin-block-end: 16px */
+  margin-left: 0 !important;        /* margin-inline-start: 0px */
+  margin-right: 0 !important;       /* margin-inline-end: 0px */
+  unicode-bidi: isolate !important;
+}
+
+/* 列表样式 */
+.theme-doc-markdown li {
+  display: list-item !important;
+  font-size: 16px !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif !important;
+  color: rgb(44, 62, 80) !important; /* #2C3E50 */
+  height: 27.2px !important;
+  line-height: 27.2px !important;
+  list-style-type: disc !important;
+  unicode-bidi: isolate !important;
+}
+/* ============================================================
+   🚑 紧急修复：图片与正文重叠问题
+   ============================================================ */
+
+/* 1. 解除段落的高度限制 (最关键的一步) */
+.theme-doc-markdown p {
+  height: auto !important;      /* 让段落高度随内容（图片）自动撑开 */
+  min-height: 27.2px;           /* 保持文字段落的最小高度 */
+  overflow: visible !important; /* 允许内容展示 */
+  margin-bottom: 24px !important; /* 恢复段落间距 */
+}
+
+/* 2. 确保图片容器不会塌陷 */
+.theme-doc-markdown figure {
+  height: auto !important;
+  display: block !important;
+  margin: 32px 0 !important;
+}
+
+/* 3. 给底部导航栏加一个更强的“安全距离” */
+nav.pagination-nav {
+  position: relative !important; /* 确保它遵循文档流 */
+  clear: both !important;        /* 清除浮动干扰 */
+  margin-top: 48px !important;   /* 强行推开距离 */
+  z-index: 10 !important;        /* 确保层级正确 */
+}
 }

@@ -1,6 +1,4 @@
 label: '💎 核心功能'
-position: 3            # 👈 决定它排第几（比如"欢迎"排第1，这个排第2）
-collapsible: false       # 👈 是否允许折叠（那个小箭头）
-link:
-  type: generated-index
-  slug: /core-features   # 👈 URL路径映射为英文
+position: 3
+collapsible: false
+link: null  # 分类标题不可点击

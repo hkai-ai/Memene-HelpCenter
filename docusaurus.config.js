@@ -98,21 +98,14 @@ const config = {
     
       },
       navbar: {
-        title: 'Memene',
+        title: 'Memene 帮助文档',
         logo: {
           alt: 'My Site Logo',
           src: 'img/logo.png',
-          href: 'https://memene.cn', // 👈 加上这一行！
-      
-          
+
         },
         items: [
-          {
-            type: 'docSidebar',
-            sidebarId: 'tutorialSidebar',
-            position: 'left',
-            label: '帮助文档',
-          },
+        
 
          {
             label: '更新日志',
