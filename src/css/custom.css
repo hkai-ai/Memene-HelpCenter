@@ -623,10 +623,11 @@ article .theme-doc-markdown,
 
 /* 4. 图片自适应修正 */
 .theme-doc-markdown img {
-  max-width: 100% !important;
+  width: auto !important;         /* 使用图片原始宽度 */
+  max-width: 100% !important;     /* 但不超过容器宽度 */
   height: auto !important;
-  border-radius: 8px; /* Cubox 的圆角通常比较克制 */
-  box-shadow: 0 4px 20px rgba(0,0,0,0.06); /* 更柔和的阴影 */
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
 }
 
 /* 5. 确保隐藏右侧目录的同时，不破坏 Flex 结构 */
@@ -657,12 +658,13 @@ div[class^="docItemContainer"] {
 /* 4. 图片样式 - 完美适配 */
 .theme-doc-markdown img {
   display: block !important;
-  max-width: 100% !important; /* 永远不要超过父容器 */
+  width: auto !important;         /* 使用图片原始宽度 */
+  max-width: 100% !important;     /* 但不超过容器宽度 */
   height: auto !important;
   margin: 32px auto !important;
   border-radius: 8px !important;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05) !important;
-  border: 1px solid #F2F4F7 !important; /* 增加一点点边框质感 */
+  border: 1px solid #F2F4F7 !important;
 }
 
 /* 5. 分页导航 (Pagination) - 已移至下方统一样式定义 */
@@ -978,13 +980,21 @@ img.no-zoom {
  * medium-zoom 放大后的样式覆盖
  */
 .medium-zoom-overlay {
-  z-index: 999;
+  z-index: 999 !important;
+  background: rgba(0, 0, 0, 0.85) !important;
 }
 
 .medium-zoom-image--opened {
-  z-index: 1000;
-  cursor: zoom-out;
-  border-radius: 4px;
+  z-index: 1000 !important;
+  cursor: zoom-out !important;
+  border-radius: 4px !important;
+  /* 放大后显示原始尺寸，不被压缩 */
+  width: auto !important;
+  max-width: 90vw !important;     /* 最大宽度为视口的 90% */
+  max-height: 90vh !important;    /* 最大高度为视口的 90% */
+  object-fit: contain !important; /* 保持比例，不裁切 */
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3) !important;
+  border: none !important;        /* 放大时去掉边框 */
 }
 
 /* 仅第一个分类标题没有上边距 */
@@ -1029,13 +1039,19 @@ img.no-zoom {
 /* 列表样式 */
 .theme-doc-markdown ul,
 .theme-doc-markdown ol {
-  color: #333333;
-  padding-left: 24px;
+  display: block !important;
+  color: #333333 !important;
+  padding-left: 24px !important;
+  margin-top: 16px !important;      /* 与上方元素的间距 */
+  margin-bottom: 16px !important;   /* 与下方元素的间距 */
+  height: auto !important;          /* 自适应高度 */
 }
 
 .theme-doc-markdown li {
-  margin-bottom: 8px;
-  line-height: 1.7;
+  display: list-item !important;
+  margin-bottom: 8px !important;
+  line-height: 1.7 !important;
+  height: auto !important;          /* 自适应高度 */
 }
 
 /* 引用块样式 */
@@ -1248,8 +1264,9 @@ kbd {
    .theme-doc-markdown ol,
    .theme-doc-markdown li,
    .theme-doc-markdown img {
-     width: 100% !important;
-     max-width: 100% !important;
+     width: auto !important;       /* 使用图片原始宽度 */
+     max-width: 100% !important;   /* 但不超过容器宽度 */
+     height: auto !important;
      box-sizing: border-box !important;
    }
    
@@ -1287,8 +1304,9 @@ article > div,
 .theme-doc-markdown ol,
 .theme-doc-markdown li,
 .theme-doc-markdown img {
-  width: 100% !important;
-  max-width: 100% !important; /* 它们不需要自己设 740px，跟随父容器即可 */
+  width: auto !important;         /* 使用图片原始宽度，不强制拉伸 */
+  max-width: 100% !important;     /* 但不超过容器宽度 */
+  height: auto !important;
   box-sizing: border-box !important;
 }
 
@@ -1382,13 +1400,13 @@ nav.pagination-nav {
   font-size: 16px !important;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif !important;
   color: rgb(44, 62, 80) !important; /* #2C3E50 */
-  height: 27.2px !important;
-  line-height: 27.2px !important;
-  margin-top: 16px !important;      /* margin-block-start: 16px */
-  margin-bottom: 16px !important;   /* margin-block-end: 16px */
-  margin-left: 0 !important;        /* margin-inline-start: 0px */
-  margin-right: 0 !important;       /* margin-inline-end: 0px */
-  unicode-bidi: isolate !important;
+  height: auto !important;          /* 自适应高度，不固定 */
+  min-height: 27.2px !important;    /* 最小高度保持一行的高度 */
+  line-height: 1.7 !important;      /* 使用相对行高，更灵活 */
+  margin-top: 16px !important;
+  margin-bottom: 16px !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
 }
 
 /* 列表样式 */
@@ -1397,10 +1415,11 @@ nav.pagination-nav {
   font-size: 16px !important;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif !important;
   color: rgb(44, 62, 80) !important; /* #2C3E50 */
-  height: 27.2px !important;
-  line-height: 27.2px !important;
+  height: auto !important;          /* 自适应高度，不固定 */
+  min-height: 27.2px !important;    /* 最小高度保持一行的高度 */
+  line-height: 1.7 !important;      /* 使用相对行高，更灵活 */
   list-style-type: disc !important;
-  unicode-bidi: isolate !important;
+  margin-bottom: 8px !important;    /* 列表项之间的间距 */
 }
 
 /* 标题样式 */
@@ -1479,13 +1498,13 @@ nav.pagination-nav {
   font-size: 16px !important;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif !important;
   color: rgb(44, 62, 80) !important; /* #2C3E50 */
-  height: 27.2px !important;
-  line-height: 27.2px !important;
-  margin-top: 16px !important;      /* margin-block-start: 16px */
-  margin-bottom: 16px !important;   /* margin-block-end: 16px */
-  margin-left: 0 !important;        /* margin-inline-start: 0px */
-  margin-right: 0 !important;       /* margin-inline-end: 0px */
-  unicode-bidi: isolate !important;
+  height: auto !important;          /* 自适应高度，不固定 */
+  min-height: 27.2px !important;    /* 最小高度保持一行的高度 */
+  line-height: 1.7 !important;      /* 使用相对行高，更灵活 */
+  margin-top: 16px !important;
+  margin-bottom: 16px !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
 }
 
 /* 列表样式 */
@@ -1494,10 +1513,11 @@ nav.pagination-nav {
   font-size: 16px !important;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif !important;
   color: rgb(44, 62, 80) !important; /* #2C3E50 */
-  height: 27.2px !important;
-  line-height: 27.2px !important;
+  height: auto !important;          /* 自适应高度，不固定 */
+  min-height: 27.2px !important;    /* 最小高度保持一行的高度 */
+  line-height: 1.7 !important;      /* 使用相对行高，更灵活 */
   list-style-type: disc !important;
-  unicode-bidi: isolate !important;
+  margin-bottom: 8px !important;    /* 列表项之间的间距 */
 }
 /* ============================================================
    Phase 4 (Final): 分页导航 - 极简文字链样式 (Minimalist Links)
