@@ -1050,7 +1050,7 @@ img.no-zoom {
 .theme-doc-markdown li {
   display: list-item !important;
   margin-bottom: 8px !important;
-  line-height: 1.7 !important;
+  line-height: 27.2px !important;   /* 固定行高 27.2px */
   height: auto !important;          /* 自适应高度 */
 }
 
@@ -1402,7 +1402,7 @@ nav.pagination-nav {
   color: rgb(44, 62, 80) !important; /* #2C3E50 */
   height: auto !important;          /* 自适应高度，不固定 */
   min-height: 27.2px !important;    /* 最小高度保持一行的高度 */
-  line-height: 1.7 !important;      /* 使用相对行高，更灵活 */
+  line-height: 27.2px !important;   /* 固定行高 27.2px */
   margin-top: 16px !important;
   margin-bottom: 16px !important;
   margin-left: 0 !important;
@@ -1417,7 +1417,7 @@ nav.pagination-nav {
   color: rgb(44, 62, 80) !important; /* #2C3E50 */
   height: auto !important;          /* 自适应高度，不固定 */
   min-height: 27.2px !important;    /* 最小高度保持一行的高度 */
-  line-height: 1.7 !important;      /* 使用相对行高，更灵活 */
+  line-height: 27.2px !important;   /* 固定行高 27.2px */
   list-style-type: disc !important;
   margin-bottom: 8px !important;    /* 列表项之间的间距 */
 }
@@ -1500,7 +1500,7 @@ nav.pagination-nav {
   color: rgb(44, 62, 80) !important; /* #2C3E50 */
   height: auto !important;          /* 自适应高度，不固定 */
   min-height: 27.2px !important;    /* 最小高度保持一行的高度 */
-  line-height: 1.7 !important;      /* 使用相对行高，更灵活 */
+  line-height: 27.2px !important;   /* 固定行高 27.2px */
   margin-top: 16px !important;
   margin-bottom: 16px !important;
   margin-left: 0 !important;
@@ -1515,7 +1515,7 @@ nav.pagination-nav {
   color: rgb(44, 62, 80) !important; /* #2C3E50 */
   height: auto !important;          /* 自适应高度，不固定 */
   min-height: 27.2px !important;    /* 最小高度保持一行的高度 */
-  line-height: 1.7 !important;      /* 使用相对行高，更灵活 */
+  line-height: 27.2px !important;   /* 固定行高 27.2px */
   list-style-type: disc !important;
   margin-bottom: 8px !important;    /* 列表项之间的间距 */
 }
@@ -1657,21 +1657,52 @@ a[class*="pagination-nav__link"]:hover,
 }
 
 /* 7. 布局对齐修正：确保下一页靠右显示 */
-.pagination-nav__item--next {
+/* 下一篇容器始终右对齐 */
+.pagination-nav__item--next,
+.pagination-nav__item.pagination-nav__item--next {
   text-align: right !important;
   justify-content: flex-end !important;
   display: flex !important;
+  margin-left: auto !important; /* 关键：自动推到右侧 */
+  flex-grow: 0 !important;      /* 不要撑满空间 */
+}
+
+/* 上一篇容器左对齐 */
+.pagination-nav__item--prev,
+.pagination-nav__item.pagination-nav__item--prev {
+  margin-right: auto !important;
+  margin-left: 0 !important;
+  flex-grow: 0 !important;
+}
+
+/* 当只有"下一篇"时（是第一个也是唯一的子元素），确保右对齐 */
+.pagination-nav__item--next:first-child,
+.pagination-nav__item--next:only-child,
+.pagination-nav > .pagination-nav__item--next:first-child {
+  margin-left: auto !important;
+}
+
+/* 针对 Docusaurus 直接放链接的结构 */
+.pagination-nav > .pagination-nav__link--next:first-child,
+.pagination-nav > .pagination-nav__link--next:only-child,
+.pagination-nav > a.pagination-nav__link--next:first-child {
+  margin-left: auto !important;
+}
+
+/* 当只有下一篇链接时，让父容器右对齐（现代浏览器） */
+.pagination-nav:has(.pagination-nav__link--next:only-child),
+.pagination-nav:has(.pagination-nav__item--next:only-child),
+.pagination-nav:has(> :first-child.pagination-nav__item--next) {
+  justify-content: flex-end !important;
 }
 /* ============================================================
    🚑 紧急修复：图片与正文重叠问题
    ============================================================ */
 
 /* 1. 解除段落的高度限制 (最关键的一步) */
+/* 注意：p 元素的主要样式已在上方定义，这里只补充 overflow */
 .theme-doc-markdown p {
-  height: auto !important;      /* 让段落高度随内容（图片）自动撑开 */
-  min-height: 27.2px;           /* 保持文字段落的最小高度 */
   overflow: visible !important; /* 允许内容展示 */
-  margin-bottom: 24px !important; /* 恢复段落间距 */
 }
 
 /* 2. 确保图片容器不会塌陷 */
