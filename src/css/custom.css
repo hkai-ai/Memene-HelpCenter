@@ -665,67 +665,7 @@ div[class^="docItemContainer"] {
   border: 1px solid #F2F4F7 !important; /* 增加一点点边框质感 */
 }
 
-/* 5. 分页导航 (Pagination) - 卡片式设计 */
-nav.pagination-nav {
-  /* 布局控制 */
-  width: 100% !important;
-  max-width: 820px !important; /* 与正文同宽 */
-  margin: 40px auto 0 !important;
-  padding: 24px 24px !important; /* 保持与正文一致的内边距 */
-  border-top: 1px solid #EAEAEA !important;
-  
-  /* Flex 布局 */
-  display: flex !important;
-  justify-content: space-between !important;
-  gap: 16px !important;
-}
-
-/* 单个按钮样式 */
-.pagination-nav__link {
-  border: 1px solid #EAEAEA !important;
-  background-color: #FFFFFF !important;
-  border-radius: 8px !important;
-  padding: 16px !important;
-  flex: 1 !important; /* 等宽分布 */
-  text-decoration: none !important;
-  transition: all 0.2s ease !important;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.03) !important;
-  
-  /* 确保文字排版 */
-  display: flex !important;
-  flex-direction: column !important;
-}
-
-/* 悬停效果 - 模仿 Cubox 选中态 */
-.pagination-nav__link:hover {
-  border-color: #E11F00 !important; /* 红色边框 */
-  background-color: #FFFDFD !important; /* 极淡红背景 */
-  transform: translateY(-1px);
-}
-
-
-/* 标题文字 - 深色 */
-.pagination-nav__label {
-  color: #2C3E50 !important;
-  font-size: 15px !important;
-  font-weight: 600 !important;
-  line-height: 1.4 !important;
-}
-
-/* 悬停时标题变红 */
-.pagination-nav__link:hover .pagination-nav__label {
-  color: #E11F00 !important;
-}
-
-/* 强制下一篇文字靠右 */
-.pagination-nav__link--next {
-  text-align: right !important;
-  align-items: flex-end !important;
-}
-.pagination-nav__link--prev {
-  text-align: left !important;
-  align-items: flex-start !important;
-}
+/* 5. 分页导航 (Pagination) - 已移至下方统一样式定义 */
 
 /* =========================================
    垂直韵律 (Vertical Rhythm) - Cubox 风格 (工程优化版)
@@ -762,7 +702,7 @@ nav.pagination-nav {
   border-radius: 8px;
   background-color: rgba(225, 31, 0, 0.05);
   padding: 16px 20px;
-  margin: 20px 0;
+  margin: 40px 0;
 }
 
 .admonition-heading {
@@ -1045,6 +985,7 @@ img.no-zoom {
   z-index: 1000;
   cursor: zoom-out;
   border-radius: 4px;
+}
 
 /* 仅第一个分类标题没有上边距 */
 .theme-doc-sidebar-container .menu > .menu__list > .menu__list-item:first-child > .menu__list-item-collapsible {
@@ -1152,77 +1093,7 @@ img.no-zoom {
 
 
 /* 1. 导航栏外层容器：布局安全修复 */
-nav.pagination-nav {
-
-  
-  /* 布局设置 */
-  width: 100% !important;
-  border-top: 1px solid #EAEAEA !important; /* 保留顶部分割线 */
-  padding-top: 32px !important;
-  display: flex !important;
-  justify-content: space-between !important;
-  
-  /* 去除容器背景 */
-  background: transparent !important;
-  box-shadow: none !important;
-  position: relative !important;
-  z-index: 10 !important;
-}
-
-/* 2. 链接本体：去除所有“卡片”样式 (边框、背景、阴影) */
-.pagination-nav__link {
-  background-color: transparent !important;
-  border: none !important;
-  box-shadow: none !important;
-  padding: 0 !important;
-  
-  /* 布局让文字和箭头横向对齐 */
-  display: inline-flex !important; 
-  align-items: center !important;  
-  
-  /* 宽度自适应，不要撑满 */
-  width: auto !important;
-  min-width: 0 !important;
-  flex: initial !important; 
-}
-
-/* 去除悬停时的背景色 */
-.pagination-nav__link:hover {
-  background-color: transparent !important;
-  border: none !important;
-  transform: none !important; /* 去除上浮动画 */
-  text-decoration: none !important;
-}
-
-/* 3. 隐藏默认的小字 (Sublabel: "上一页" / "下一页") */
-.pagination-nav__sublabel {
-  display: none !important;
-}
-
-/* 4. 页面标题样式 (蓝色文字) */
-.pagination-nav__label {
-  color: #2C46F1 !important; /* 你想要的亮蓝色 */
-  font-size: 16px !important;
-  font-weight: 500 !important;
-  line-height: 1.5 !important;
-  transition: color 0.2s ease !important;
-}
-
-/* 悬停时文字稍微变深 */
-.pagination-nav__link:hover .pagination-nav__label {
-  color: #1a35d1 !important; 
-  text-decoration: underline !important; /* 可选：增加下划线增强点击感 */
-}
-
-
-
-
-/* 布局对齐修正：确保下一页靠右显示 */
-.pagination-nav__item--next {
-  text-align: right !important;
-  justify-content: flex-end !important;
-  display: flex !important;
-}
+/* 分页导航样式已移至下方统一定义（第 1595 行开始） */
 
 /* ============================================================
    Phase 5 (Final): 搜索框 - 极简静态版 (Static Minimalist)
@@ -1247,16 +1118,15 @@ nav.pagination-nav {
   /* 尺寸与形状 */
   height: 33.6px !important;
   border-radius: 99px !important; /* 胶囊圆角 */
-  width: 215.6px !important;        /*固定宽度，不再伸缩 */
+  width: 201.6px !important;        /*固定宽度，不再伸缩 */
   
   /* 色彩 */
-  background-color:  #FFFFFF !important;
-  border: 1px solid transparent !important;
-  color: #FFFFFF!important;
-  border: 1px solid #EAEAEA !important; /* 默认有描边 */
-  color: #2C3E50 !important; /* 文字颜色修正 */
+  background-color: #FFFFFF !important; /* 浅灰底色 */
+  border: 1px solid  #EEF0F4 !important;
+  color: #2C3E50 !important;
+  
   /* 内部排版 (保留左侧放大镜图标的空间) */
-  padding: 0 16px 0 38px !important; 
+  padding: 0 8px 0 32px !important; 
   font-size: 14px !important;
   
   /* 移除之前的宽度过渡动画 */
@@ -1272,21 +1142,12 @@ nav.pagination-nav {
 }
 
 /* 4. 交互态：获得焦点 (Focus) */
-
 .navbar__search-input:focus,
 .navbar__search input:focus {
-  width: 215.6px !important;             /* 👈 关键：保持宽度不变 */
+  width: 201.6px !important;             /* 👈 关键：保持宽度不变 */
   background-color: #FFFFFF !important;
-  border-color: #E11F00 !important;    /* 仅保留红框反馈 */
-}
-
-/* 5. 悬停态 */
-.navbar__search-input:hover,
-.navbar__search input:hover {
-  background-color: #EEF0F4 !important;
-  border-color: rgba(0,0,0,0.05) !important;
-}
-
+  border: 1px solid #E11F00 !important;    /* 仅保留红框反馈 */
+  }
 /* 6. 隐藏所有提示文字和快捷键 (Search & Ctrl+K) */
 
 /* 方法A：隐藏输入框内的 placeholder 文字 ("Search") */
@@ -1317,9 +1178,9 @@ kbd {
   /* 移动端点击还是需要展开的，不然没法输入 */
   .navbar__search-input:focus,
   .navbar__search input:focus {
-    width: 215.6px !important; 
+    width: 200px !important; 
     background-color: #FFF !important;
-    padding: 0 8px 0 32px !important; 
+    padding-left: 38px !important;
   }
 }
 
@@ -1361,7 +1222,7 @@ kbd {
         margin-top: 0 !important;
         margin-right: 250.4px !important;
         margin-bottom: 0 !important;
-        margin-left: 575.4px !important;
+        margin-left: 450.4px !important;
         
         /* Border: 所有方向 0 */
         border-top: 0 !important;
@@ -1406,7 +1267,7 @@ article > div,
   max-width: 740px !important;
   
   /* 左右 margin 设置为 250.4px，不居中 */
-  margin-left: 555.4px !important;
+  margin-left: 300.4px !important;
   margin-right: 250.4px !important;
   
   /* 内边距：左右 40px */
@@ -1541,6 +1402,246 @@ nav.pagination-nav {
   list-style-type: disc !important;
   unicode-bidi: isolate !important;
 }
+
+/* 标题样式 */
+.theme-doc-markdown h1 {
+  display: block !important;
+  font-size: 35.2px !important;
+  font-weight: 600 !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif !important;
+  color: rgb(44, 62, 80) !important; /* #2C3E50 */
+  height: 30px !important;
+  min-height: 30px !important;
+  max-height: 30px !important;
+  line-height:30px !important;
+  margin-top: -4px !important;      /* margin-block-start: -24px */
+  margin-bottom: 16px !important;     /* margin-block-end: 16px */
+  margin-left: 0 !important;          /* margin-inline-start: 0px */
+  margin-right: 0 !important;         /* margin-inline-end: 0px */
+  padding-top: 40px !important;
+  padding-bottom: 0 !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  box-sizing: content-box !important; /* 确保 height 只包含内容，不包括 padding */
+  unicode-bidi: isolate !important;
+  overflow: visible !important;
+}
+
+.theme-doc-markdown h2 {
+  display: block !important;
+  font-size: 26.4px !important;
+  font-weight: 600 !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif !important;
+  color: rgb(44, 62, 80) !important; /* #2C3E50 */
+  width: 740px !important;
+  min-width: 740px !important;
+  max-width: 740px !important;
+  height: 33px !important;
+  min-height: 33px !important;
+  max-height: 33px !important;
+  line-height: 33px !important;
+  margin-top: -49.6px !important;
+  margin-bottom: 0px !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  padding-top: 73.6px !important;
+  padding-bottom: 4.8px !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  border-bottom: 0.8px solid rgb(234, 236, 239) !important; /* #EAECEF */
+  box-sizing: content-box !important; /* 确保 width 和 height 只包含内容，不包括 padding */
+  -webkit-font-smoothing: antialiased !important;
+  unicode-bidi: isolate !important;
+  overflow: visible !important;
+}
+
+.theme-doc-markdown h3 {
+  font-size: 18px !important;
+  margin-top: 32px !important;
+  margin-bottom: 16px !important;
+  color: #111827 !important;
+  font-weight: 600 !important;
+}
+
+.theme-doc-markdown h4,
+.theme-doc-markdown h5,
+.theme-doc-markdown h6 {
+  font-size: 16px !important;
+  margin-top: 24px !important;
+  margin-bottom: 12px !important;
+  color: #111827 !important;
+  font-weight: 600 !important;
+}
+
+/* 正文段落间距 */
+.theme-doc-markdown p {
+  display: block !important;
+  font-size: 16px !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif !important;
+  color: rgb(44, 62, 80) !important; /* #2C3E50 */
+  height: 27.2px !important;
+  line-height: 27.2px !important;
+  margin-top: 16px !important;      /* margin-block-start: 16px */
+  margin-bottom: 16px !important;   /* margin-block-end: 16px */
+  margin-left: 0 !important;        /* margin-inline-start: 0px */
+  margin-right: 0 !important;       /* margin-inline-end: 0px */
+  unicode-bidi: isolate !important;
+}
+
+/* 列表样式 */
+.theme-doc-markdown li {
+  display: list-item !important;
+  font-size: 16px !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif !important;
+  color: rgb(44, 62, 80) !important; /* #2C3E50 */
+  height: 27.2px !important;
+  line-height: 27.2px !important;
+  list-style-type: disc !important;
+  unicode-bidi: isolate !important;
+}
+/* ============================================================
+   Phase 4 (Final): 分页导航 - 极简文字链样式 (Minimalist Links)
+   目标：修复重叠 Bug + 去除卡片边框，实现纯文字箭头导航
+   ============================================================ */
+
+/* ============================================================
+   分页导航 - 纯净蓝色文字链 + 箭头样式
+   ============================================================ */
+
+/* 1. 导航栏外层容器：添加分割线，分割线与内容分开 */
+nav.pagination-nav,
+nav.docusaurus-mt-lg.pagination-nav,
+nav[class*="pagination-nav"],
+.pagination-nav {
+  /* 布局设置 - 与 .theme-doc-markdown 对齐 */
+ 
+  width: 740px !important; /* 与 .theme-doc-markdown 同宽 */
+  height: 48.8px !important; /* 固定高度 48.8px */
+  margin-top: 64px !important;
+  margin-left: 450.4px !important; /* 与 .theme-doc-markdown 相同的左边距（用户已修改为 480.4px） */
+  margin-right: 250.4px !important; /* 与 .theme-doc-markdown 相同的右边距 */
+  padding-top: 32px !important; /* 内容与分割线的间距 */
+  padding-bottom: 0 !important;
+  padding-left: 40px !important; /* 与 .theme-doc-markdown 相同的左右 padding */
+  padding-right: 40px !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  box-sizing: border-box !important; /* 确保 padding 包含在宽度内 */
+  
+  /* 去除所有装饰 */
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  border-top: none !important;
+  border-bottom: none !important;
+  border-left: none !important;
+  border-right: none !important;
+  box-shadow: none !important;
+  position: relative !important;
+  z-index: 10 !important;
+}
+
+/* 使用伪元素添加分割线，与内容分开 */
+nav.pagination-nav::before,
+nav.docusaurus-mt-lg.pagination-nav::before,
+nav[class*="pagination-nav"]::before,
+.pagination-nav::before {
+  content: '' !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  height: 1px !important;
+  background-color: #EAEAEA !important;
+  border: none !important;
+}
+
+
+/* 2. 链接本体：纯净文字链，无边框无背景 */
+.pagination-nav__link,
+a.pagination-nav__link,
+.pagination-nav__link.pagination-nav__link--next,
+.pagination-nav__link.pagination-nav__link--prev,
+a[class*="pagination-nav__link"],
+.pagination-nav a {
+  /* 去除所有装饰 */
+  background-color: transparent !important;
+  background: transparent !important;
+  border: none !important;
+  border-top: none !important;
+  border-bottom: none !important;
+  border-left: none !important;
+  border-right: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  
+  /* 布局让文字和箭头横向对齐 */
+  display: inline-flex !important; 
+  align-items: center !important;  
+  
+  /* 宽度自适应，不要撑满 */
+  width: auto !important;
+  min-width: 0 !important;
+  flex: initial !important;
+  
+  /* 去除默认链接样式 */
+  text-decoration: none !important;
+}
+
+/* 3. 悬停状态：保持纯净，只改变文字颜色 */
+.pagination-nav__link:hover,
+a.pagination-nav__link:hover,
+.pagination-nav__link.pagination-nav__link--next:hover,
+.pagination-nav__link.pagination-nav__link--prev:hover,
+a[class*="pagination-nav__link"]:hover,
+.pagination-nav a:hover {
+  background-color: transparent !important;
+  background: transparent !important;
+  border: none !important;
+  border-top: none !important;
+  border-bottom: none !important;
+  border-left: none !important;
+  border-right: none !important;
+  transform: none !important;
+  text-decoration: none !important;
+  box-shadow: none !important;
+}
+
+/* 4. 隐藏默认的小字 (Sublabel: "上一页" / "下一页") */
+.pagination-nav__sublabel {
+  display: none !important;
+}
+
+/* 5. 页面标题样式：纯净蓝色文字 */
+.pagination-nav__label {
+  color: #2C46F1 !important; /* 亮蓝色 */
+  font-size: 16px !important;
+  font-weight: 500 !important;
+  line-height: 1.5 !important;
+  transition: color 0.2s ease !important;
+  text-decoration: none !important;
+}
+
+/* 悬停时文字稍微变深，可选择性添加下划线 */
+.pagination-nav__link:hover .pagination-nav__label {
+  color: #1a35d1 !important; 
+  text-decoration: none !important; /* 不显示下划线，保持纯净 */
+}
+
+/* 悬停时箭头也一起变色 */
+.pagination-nav__link--prev:hover::before,
+.pagination-nav__link--next:hover::after {
+  color: #1a35d1 !important;
+}
+
+/* 7. 布局对齐修正：确保下一页靠右显示 */
+.pagination-nav__item--next {
+  text-align: right !important;
+  justify-content: flex-end !important;
+  display: flex !important;
+}
 /* ============================================================
    🚑 紧急修复：图片与正文重叠问题
    ============================================================ */
@@ -1560,11 +1661,11 @@ nav.pagination-nav {
   margin: 32px 0 !important;
 }
 
-/* 3. 给底部导航栏加一个更强的“安全距离” */
+/* 3. 给底部/* 3. 给底部导航栏加一个更强的“安全距离” */
 nav.pagination-nav {
   position: relative !important; /* 确保它遵循文档流 */
   clear: both !important;        /* 清除浮动干扰 */
   margin-top: 48px !important;   /* 强行推开距离 */
   z-index: 10 !important;        /* 确保层级正确 */
 }
-}
+/* 注意：此样式会被上方的统一样式覆盖，如需调整请修改上方的统一样式 */
